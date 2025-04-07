@@ -105,7 +105,7 @@ post_install do |installer|
   strip_valid_archs(installer)
   update_frameworks_script(installer)
   disable_non_development_pod_warnings(installer)
-  fix_ringrtc_project_symlink(installer)
+#  fix_ringrtc_project_symlink(installer)
   fetch_ringrtc
   copy_acknowledgements
 end
@@ -243,10 +243,15 @@ def disable_non_development_pod_warnings(installer)
   end
 end
 
-# Workaround for RingRTC's weird cached artifacts, hopefully temporary
 def fix_ringrtc_project_symlink(installer)
-  ringrtc_header_ref = installer.pods_project.reference_for_path(installer.sandbox.pod_dir('SignalRingRTC') + 'out/release/libringrtc/ringrtc.h')
-  if ringrtc_header_ref.path.start_with?('../') || ringrtc_header_ref.path.start_with?('/') then
+  ringrtc_path = installer.sandbox.pod_dir('SignalRingRTC') + '/out/release/libringrtc/ringrtc.h'
+  unless File.exist?(ringrtc_path)
+    puts "Skipping fix_ringrtc_project_symlink: file not found at #{ringrtc_path}"
+    return
+  end
+
+  ringrtc_header_ref = installer.pods_project.reference_for_path(ringrtc_path)
+  if ringrtc_header_ref.path.start_with?('../') || ringrtc_header_ref.path.start_with?('/')
     ringrtc_header_ref.path = 'out/release/libringrtc/ringrtc.h'
   end
 end
