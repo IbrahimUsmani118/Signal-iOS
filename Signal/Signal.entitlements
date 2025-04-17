@@ -17,18 +17,13 @@
 	<string>NSFileProtectionComplete</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array/>
-	<key>com.apple.developer.in-app-payments</key>
-	<array>
-		<string>merchant.$(SIGNAL_MERCHANTID)</string>
-	</array>
 	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
 	<string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
 	<key>com.apple.developer.usernotifications.communication</key>
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.$(SIGNAL_BUNDLEID_PREFIX).signal.group</string>
-		<string>group.$(SIGNAL_BUNDLEID_PREFIX).signal.group.staging</string>
+		<string>group.org.whispersystems.signal</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
