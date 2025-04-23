@@ -63,6 +63,8 @@ target 'Signal' do
 
   # Pods only available inside the main Signal app
   ui_pods
+    pod 'AWSCore'
+    pod 'AWSDynamoDB'
 
   target 'SignalTests' do
     inherit! :search_paths
@@ -73,11 +75,15 @@ end
 
 target 'SignalShareExtension' do
   ui_pods
+  pod 'AWSCore'
+  pod 'AWSDynamoDB'
 end
 
 target 'SignalUI' do
   ui_pods
 
+  pod 'AWSCore'
+  pod 'AWSDynamoDB'
   target 'SignalUITests' do
     inherit! :search_paths
   end
@@ -85,13 +91,16 @@ end
 
 target 'SignalServiceKit' do
   pod 'CocoaLumberjack'
-
+  pod 'AWSCore'
+  pod 'AWSDynamoDB'
   target 'SignalServiceKitTests' do
     inherit! :search_paths
   end
 end
 
 target 'SignalNSE' do
+  pod 'AWSCore'
+  pod 'AWSDynamoDB'
 end
 
 post_install do |installer|

@@ -48,6 +48,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>0</string>
+	<key>INIntentsSupported</key>
+	<array>
+		<string>Intent</string>
+	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LOGS_EMAIL</key>
