@@ -9,6 +9,8 @@ import Intents
 import SignalServiceKit
 import SignalUI
 import WebRTC
+import AWSCore
+
 
 enum LaunchPreflightError {
     case unknownDatabaseVersion
