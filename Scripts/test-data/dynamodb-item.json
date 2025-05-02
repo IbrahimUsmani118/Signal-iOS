@@ -1,0 +1,12 @@
+// Sample DynamoDB item for testing
+// Decode this file directly into --item for aws cli put-item
+{
+  // Primary (hash) key: a unique content hash for deduplication
+  "ContentHash": { "S": "abc123def456ghi789" },
+
+  // ISO8601 timestamp when this item was created
+  "Timestamp": { "S": "2025-04-30T22:00:00Z" },
+
+  // TTL (in seconds since epoch) set 30 days in the future to auto-expire
+  "TTL": { "N": "1748563200" }
+}

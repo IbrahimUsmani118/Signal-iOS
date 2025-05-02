@@ -1,0 +1,132 @@
+name: DuplicateContentDetection
+options:
+  bundleIdPrefix: com.signal
+  deploymentTarget:
+    iOS: 15.0
+  platforms:
+    iOS: 15.0
+  settings:
+    SWIFT_COMPILATION_MODE: wholemodule
+    SWIFT_OPTIMIZATION_LEVEL: -O
+    SWIFT_ACTIVE_COMPILATION_CONDITIONS: COCOAPODS
+    GCC_OPTIMIZATION_LEVEL: 3
+    ENABLE_BITCODE: NO
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+    ONLY_ACTIVE_ARCH: YES
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+    CLANG_ANALYZER_NONNULL: YES
+    CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER: YES
+    CLANG_WARN_DOCUMENTATION_COMMENTS: YES
+    CLANG_WARN_EMPTY_BODY: YES
+    CLANG_WARN_INFINITE_RECURSION: YES
+    CLANG_WARN_SUSPICIOUS_MOVE: YES
+    CLANG_WARN_UNGUARDED_AVAILABILITY: YES
+    CLANG_WARN_UNREACHABLE_CODE: YES
+    ENABLE_STRICT_OBJC_MSGSEND: YES
+    GCC_NO_COMMON_BLOCKS: YES
+    GCC_WARN_64_TO_32_BIT_CONVERSION: YES
+    GCC_WARN_ABOUT_RETURN_TYPE: YES_ERROR
+    GCC_WARN_UNDECLARED_SELECTOR: YES
+    GCC_WARN_UNINITIALIZED_AUTOS: YES_AGGRESSIVE
+    GCC_WARN_UNUSED_FUNCTION: YES
+    GCC_WARN_UNUSED_VARIABLE: YES
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+    SWIFT_WARNINGS_AS_ERRORS: YES
+    BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+
+packages:
+  Logging:
+    url: https://github.com/apple/swift-log.git
+    exactVersion: 1.6.3
+
+targets:
+  DuplicateContentDetection:
+    type: framework
+    platform: iOS
+    sources:
+      - path: DuplicateContentDetection/Sources
+        name: Sources
+        excludes:
+          - "**/*.h"
+    settings:
+      INFOPLIST_FILE: DuplicateContentDetection/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.signal.DuplicateContentDetection
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      OTHER_LDFLAGS: $(inherited) -ObjC
+      SUPPORTS_MACCATALYST: NO
+      BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+    dependencies:
+      - target: SignalCore
+      - package: Logging
+      - sdk: Foundation.framework
+      - sdk: UIKit.framework
+    scheme:
+      testTargets:
+        - DuplicateContentDetectionTests
+      gatherCoverageData: true
+      build:
+        parallelizeBuild: true
+        buildImplicitDependencies: true
+        runPostActionsOnFailure: true
+
+  SignalCore:
+    type: framework
+    platform: iOS
+    sources:
+      - path: SignalCore
+        name: Core
+        excludes:
+          - "**/*.h"
+    settings:
+      INFOPLIST_FILE: SignalCore/Sources/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.signal.SignalCore
+      SUPPORTS_MACCATALYST: NO
+      BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+    dependencies:
+      - package: Logging
+      - sdk: Foundation.framework
+      - sdk: UIKit.framework
+
+  SignalServiceKit:
+    type: framework
+    platform: iOS
+    sources:
+      - path: SignalServiceKit/Network
+        name: Network
+        excludes:
+          - "**/*.h"
+      - path: SignalServiceKit/Tests
+        name: Tests
+        excludes:
+          - "**/*.h"
+    settings:
+      INFOPLIST_FILE: SignalServiceKit/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.signal.SignalServiceKit
+      SUPPORTS_MACCATALYST: NO
+      BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+    dependencies:
+      - package: Logging
+      - sdk: Foundation.framework
+      - sdk: UIKit.framework
+
+  DuplicateContentDetectionTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DuplicateContentDetection/Tests
+        name: Tests
+        excludes:
+          - "**/*.h"
+    settings:
+      INFOPLIST_FILE: DuplicateContentDetection/Tests/Info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.signal.DuplicateContentDetectionTests
+      SUPPORTS_MACCATALYST: NO
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: COCOAPODS
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+    dependencies:
+      - target: DuplicateContentDetection
+      - target: SignalServiceKit
+      - package: Logging
+      - sdk: Foundation.framework
+      - sdk: UIKit.framework 

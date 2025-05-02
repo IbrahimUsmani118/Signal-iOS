@@ -1,0 +1,42 @@
+feat(aws): Implement comprehensive AWS service validation system for duplicate content detection
+
+This commit enhances the duplicate content detection system with improved AWS 
+integration, advanced error handling, and comprehensive validation features:
+
+- AWS configuration changes:
+  - Updated region from us-west-2 to us-east-1 for consistency
+  - Updated DynamoDB table name to "SignalContentHashes"
+  - Updated Identity Pool ID to match aws-config.json
+  - Added API Gateway endpoint configuration for different operations
+
+- Added AWSCredentialsVerificationManager:
+  - Implements robust service validation with singleton pattern
+  - Provides both async/await and completion handler interfaces
+  - Performs multi-level verification (identity, connectivity, table structure)
+  - Implements detailed diagnostic reporting capabilities
+
+- Enhanced GlobalSignatureService error handling:
+  - Implemented improved exponential backoff with jitter
+  - Added categorization of retryable vs terminal errors
+  - Added configurable retry policies with capped maximum delay
+  - Enhanced idempotency for hash operations
+
+- AppDelegate integration:
+  - Updated initialization flow with proper AWS service verification
+  - Added graceful degradation when services are unavailable
+  - Implemented structured logging of AWS service status
+
+- Added APIGatewayClient for endpoint interaction:
+  - Implemented configurable retry logic for HTTP operations
+  - Added proper error classification and handling
+  - Added support for different API Gateway endpoints
+
+- Added comprehensive test and validation components:
+  - Created verification tests for AWS credentials, DynamoDB, and API Gateway
+  - Added mock implementations for unit testing
+  - Implemented test scripts for component validation
+  - Added diagnostic reporting functionality
+
+These improvements provide a more robust, reliable integration with AWS
+services for the duplicate content detection system while gracefully
+handling service disruptions to maintain core app functionality.

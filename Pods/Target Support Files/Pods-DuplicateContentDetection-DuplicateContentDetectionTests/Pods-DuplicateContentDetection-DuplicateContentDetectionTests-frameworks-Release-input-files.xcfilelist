@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-DuplicateContentDetection-DuplicateContentDetectionTests/Pods-DuplicateContentDetection-DuplicateContentDetectionTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AWSAPIGateway/AWSAPIGateway.framework
+${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework
+${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework
+${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework
+${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework
+${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework
