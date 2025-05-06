@@ -1,5 +1,7 @@
 platform :ios, '15.0'
 
+project File.expand_path('Signal.xcodeproj', __dir__)
+
 use_frameworks!
 
 ###
@@ -59,7 +61,7 @@ def ui_pods
 end
 
 target 'Signal' do
-  project 'Signal.xcodeproj', 'Debug' => :debug, 'Release' => :release
+  project File.expand_path('Signal.xcodeproj', __dir__), 'Debug' => :debug, 'Release' => :release
 
   # Pods only available inside the main Signal app
   ui_pods
