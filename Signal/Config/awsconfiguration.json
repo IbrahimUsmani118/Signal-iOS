@@ -18,14 +18,14 @@
     },
     "S3TransferUtility": {
         "Default": {
-            "Bucket": "2314823894myawsbucket",
+            "Bucket": "signal-image-uploads",
             "Region": "us-east-1"
         }
     },
     "DynamoDB": {
         "Default": {
             "Region": "us-east-1",
-            "TableName": "ImageSignatures"
+            "TableName": "signal-image-signatures"
         }
     }
 } 
