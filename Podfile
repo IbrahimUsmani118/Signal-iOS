@@ -51,6 +51,11 @@ pod 'libwebp', podspec: './ThirdParty/libwebp.podspec.json'
 
 pod 'Reachability', :inhibit_warnings => true
 
+# AWS SDK dependencies
+pod 'AWSS3'
+pod 'AWSDynamoDB'
+pod 'AWSCore'
+
 def ui_pods
   pod 'BonMot', inhibit_warnings: true
   pod 'PureLayout', :inhibit_warnings => true
