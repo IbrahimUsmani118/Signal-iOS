@@ -2,6 +2,7 @@ platform :ios, '15.0'
 
 project File.expand_path('Signal.xcodeproj', __dir__)
 
+
 use_frameworks!
 
 ###
@@ -162,33 +163,6 @@ def configure_testable_build(installer)
       next unless ["Testable Release", "Debug", "Profiling"].include?(build_configuration.name)
       build_configuration.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
       build_configuration.build_settings['ENABLE_TESTABILITY'] = 'YES'
-    end
-  end
-end
-
-# Xcode 13 dropped support for some older iOS versions. We only need them
-# to support our project's minimum version, so let's bump each Pod's min
-# version to our min to suppress these warnings.
-def promote_minimum_supported_version(installer)
-  project_min_version = current_target_definition.platform.deployment_target
-
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |build_configuration|
-      target_version_string = build_configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
-      target_version = Version.create(target_version_string)
-
-      if target_version < project_min_version
-        build_configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = project_min_version.version
-      end
-    end
-  end
-end
-
-
-def disable_bitcode(installer)
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['ENABLE_BITCODE'] = 'NO'
     end
   end
 end
